@@ -1,0 +1,3 @@
+- 0: All OK, no error  
+- 1: No option given
+- 2: Option not recognized
