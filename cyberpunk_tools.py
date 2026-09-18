@@ -6,6 +6,11 @@ VERSION = "0.0.4"
 # =================================================================
 
 def print_help():
+    """
+    Print help message to stdout
+    :return:
+    """
+
     print("Usage:\n  cyberpunk_tools <option>")
     print("Options:")
     print("  -h, --help: display this help message")
@@ -13,15 +18,53 @@ def print_help():
     print("  character <option>: character related tools")
 
 def print_character_help():
+    """
+    Print help message of character option to stdout
+    :return:
+    """
+
     print("Usage:\n  cyberpunk_tools character <option>")
     print("Options:")
     print("  -h, --help: display this help message")
     print("  sgs: gen a random sgs")
 
 def print_version():
+    """
+    Print version message to stdout
+    :return:
+    """
+
     print(f"cyberpunk tools version: {VERSION}")
 
 def gen_sgs()->str:
+    """
+    Generate a random sex, gender and sexuality string
+
+    Format: s/g/s
+
+    Possible values:
+        sex:
+            - M - Male
+            - F - Female
+            - IF - Intersex Female Appearance
+            - IM - Intersex Male Appearance
+            - IA - Intersex Androgynous Appearance
+        gender:
+            - M - Male
+            - F - Female
+            - NB - Non binary
+            - GF - Gender Fluid
+            - A - Androgynous
+        sexuality:
+            - Hete - Heterosexual
+            - Homo - Homosexual
+            - Bi - Bisexual
+            - A - Asexual
+            - Pan - Pansexual
+
+
+    :return:formatted string
+    """
     sex_roll=randint(1,100)
     sex=""
     if sex_roll <= 49:
@@ -44,7 +87,9 @@ def gen_sgs()->str:
     else:
         gender_roll=randint(1,100)
         if gender_roll <= 95:
-            gender="M" if sex[-1]=="F" else "F"
+            gender = "M" if sex[-1] == "F" else gender
+            gender = "F" if sex[-1] == "M" else gender
+            gender = "A" if sex[-1] == "A" else gender
         elif gender_roll <= 99:
             gender="NB"
         else:
@@ -52,11 +97,11 @@ def gen_sgs()->str:
 
     sexuality_roll=randint(1,100)
     sexuality=""
-    if sexuality_roll <= 95:
+    if sexuality_roll <= 95 and gender!="A":
         sexuality="Hete"
     else:
         sexuality_roll=randint(1,100)
-        if sexuality_roll <= 60:
+        if sexuality_roll <= 60 and gender!="A":
             sexuality="Homo"
         elif sexuality_roll <= 90:
             sexuality="Bi"
@@ -70,6 +115,7 @@ def gen_sgs()->str:
 
 if __name__ == '__main__':
 
+    # ignore exec path
     args=sys.argv[1:]
 
     if len(args) < 1:
