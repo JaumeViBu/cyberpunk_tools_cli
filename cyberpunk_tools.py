@@ -9,7 +9,7 @@ class EXIT_CODES(IntEnum):
     OPTION_NOT_RECOGNIZED = 2
     MODE_NOT_RECOGNIZED = 3 # Stat gen mode not recognized
 
-# =================================================================
+# ======================================================================================================================
 
 def print_help():
     """
@@ -205,10 +205,7 @@ def gen_stats_d10()->dict:
         stats[k]=randint(3,10)
     return stats
 
-# =================================================================
-
-
-
+# ======================================================================================================================
 
 if __name__ == '__main__':
 
@@ -225,37 +222,40 @@ if __name__ == '__main__':
     if arg in ["-v", "--version"]:
         print_version()
         sys.exit(EXIT_CODES.OK)
+
     if arg in ["-h", "--help"]:
         print_help()
         sys.exit(EXIT_CODES.OK)
+
     if arg in ["character"]:
         if len(args)<2:
             print("No options provided...", file=sys.stderr)
             print_help()
             sys.exit(EXIT_CODES.NO_OPTION_FOUND)
         arg=args[1]
+
         if arg in ["-h", "--help"]:
             print_character_help()
             sys.exit(EXIT_CODES.OK)
+
         if arg in ["sgs"]:
             print(gen_sgs())
             sys.exit(EXIT_CODES.OK)
+
         if arg in ["role"]:
             print(gen_role())
             sys.exit(EXIT_CODES.OK)
+
         if arg in ["stats"]:
             if len(args)<2:
                 print("No option provided...", file=sys.stderr)
                 print_help()
                 sys.exit(EXIT_CODES.NO_OPTION_FOUND)
+
             mode=args[2]
             gen_stats(mode,show=True)
             sys.exit(EXIT_CODES.OK)
 
-
     print(f"Unknown option: {arg}",file=sys.stderr)
     print_help()
     sys.exit(EXIT_CODES.OPTION_NOT_RECOGNIZED)
-
-
-
