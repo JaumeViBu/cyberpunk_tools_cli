@@ -2,7 +2,7 @@ import sys
 from enum import IntEnum
 from random import randint,choice
 
-VERSION = "0.0.5"
+VERSION = "0.0.6"
 class EXIT_CODES(IntEnum):
     OK = 0
     NO_OPTION_FOUND = 1
