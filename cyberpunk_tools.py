@@ -1,7 +1,7 @@
 import sys
-from random import randint
+from random import randint,choice
 
-VERSION = "0.0.4"
+VERSION = "0.0.5"
 
 # =================================================================
 
@@ -16,6 +16,9 @@ def print_help():
     print("  -h, --help: display this help message")
     print("  -v, --version: display the current version")
     print("  character <option>: character related tools")
+    print("    -h, --help: display this help message")
+    print("    sgs: gen a random sgs string")
+    print("    role: gen a random role string")
 
 def print_character_help():
     """
@@ -26,7 +29,9 @@ def print_character_help():
     print("Usage:\n  cyberpunk_tools character <option>")
     print("Options:")
     print("  -h, --help: display this help message")
-    print("  sgs: gen a random sgs")
+    print("  sgs: gen a random sgs string")
+    print("  role: gen a random role string")
+
 
 def print_version():
     """
@@ -54,7 +59,6 @@ def gen_sgs()->str:
             - F - Female
             - NB - Non binary
             - GF - Gender Fluid
-            - A - Androgynous
         sexuality:
             - Hete - Heterosexual
             - Homo - Homosexual
@@ -86,10 +90,9 @@ def gen_sgs()->str:
         gender=sex[-1]
     else:
         gender_roll=randint(1,100)
-        if gender_roll <= 95:
+        if gender_roll <= 95 and sex[-1]!="A":
             gender = "M" if sex[-1] == "F" else gender
             gender = "F" if sex[-1] == "M" else gender
-            gender = "A" if sex[-1] == "A" else gender
         elif gender_roll <= 99:
             gender="NB"
         else:
@@ -101,7 +104,7 @@ def gen_sgs()->str:
         sexuality="Hete"
     else:
         sexuality_roll=randint(1,100)
-        if sexuality_roll <= 60 and gender!="A":
+        if sexuality_roll <= 60 and sex[-1]!="A":
             sexuality="Homo"
         elif sexuality_roll <= 90:
             sexuality="Bi"
@@ -111,7 +114,41 @@ def gen_sgs()->str:
             sexuality="Pan"
     return f"{sex}/{gender}/{sexuality}"
 
+def gen_role()->str:
+    """
+    Generate a random role string
+
+    Possible values:
+        - Rockerboy
+        - Solo
+        - Netrunner
+        - Corporate
+        - Techie
+        - Cop
+        - Fixer
+        - Media
+        - Nomad
+        - Medtech(tech esp)
+    :return:
+    """
+    roles=[
+        "Rockerboy",
+        "Solo",
+        "Netrunner",
+        "Corporate",
+        "Techie",
+        "Cop",
+        "Fixer",
+        "Media",
+        "Nomad",
+        "Medtech(tech esp)",
+    ]
+    return  choice(roles)
+
 # =================================================================
+
+
+
 
 if __name__ == '__main__':
 
@@ -142,6 +179,9 @@ if __name__ == '__main__':
             sys.exit(0)
         if arg in ["sgs"]:
             print(gen_sgs())
+            sys.exit(0)
+        if arg in ["role"]:
+            print(gen_role())
             sys.exit(0)
 
 
