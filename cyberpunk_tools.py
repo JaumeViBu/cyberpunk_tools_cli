@@ -184,8 +184,102 @@ def gen_lucky_event(show=False)->str:
     pass
 
 def gen_disaster_event(show=False)->str:
-    #TODO
-    pass
+    roll = randint(1,10)
+    event = ""
+
+    match roll:
+        case 1:
+            event = f"financial loss/debt : -{randint(1,10)*100}ed"
+        case 2:
+            event = f"prison :{randint(1,10)} months"
+        case 3:
+            event = "illness/addiction : -1 REF"
+        case 4:
+            event = f"betrayal : "
+            roll = randint(1,10)
+            if roll <=3:
+                event += "blackmail"
+            elif roll <=7:
+                event += "secret exposed"
+            else:
+                event += "betrayed by romance/career partner"
+        case 5:
+            event = "accident : "
+            roll = randint(1,10)
+            if roll <=4:
+                event += "disfigured : -5 ATTR"
+            elif roll <=6:
+                event += f"hospital : {randint(1,10)} months"
+            elif roll <=8:
+                event += f"mem loss : {randint(1,10)} months"
+            else:
+                event += f"recurrent nightmares : 80% chance"
+        case 6:
+            event = "close one killed : "
+            roll = randint(1,3)
+
+            if roll == 1:event += "lover : "
+            elif roll == 2:event += "friend : "
+            elif roll == 3:event += "relative : "
+
+            roll = randint(1,10)
+            if roll <=5:
+                event += "accident"
+            elif roll <=8:
+                event += "murdered : unkown"
+            else:
+                event += "murdered : known"
+        case 7:
+            event = "false accusation : "
+            roll = randint(1,10)
+
+            if roll <=3:
+                event += "theft"
+            elif roll <=5:
+                event += "cowardice"
+            elif roll <=8:
+                event += "murder"
+            elif roll <=9:
+                event += "rape"
+            elif roll <=10:
+                event += "lying/betrayal"
+        case 8:
+            event = "hunted by law : "
+            roll = randint(1,10)
+
+            if roll <=3:
+                event += "couple local cops"
+            elif roll <=6:
+                event += "entire local force"
+            elif roll <=8:
+                event += "state police/militia"
+            elif roll <=10:
+                event += "national police force"
+        case 9:
+            event = "hunted by corpo : "
+            roll = randint(1,10)
+
+            if roll <=3:
+                event += "small local firm"
+            elif roll <=6:
+                event += "larger corp state wide"
+            elif roll <=8:
+                event += "big national corp, nation wide"
+            elif roll <=10:
+                event += "mega corp, multinational"
+        case 10:
+            event = "mental/physical incapacitation : "
+            roll = randint(1,10)
+            if roll <=3:
+                event += "-1 REF"
+            elif roll <=7:
+                event += "-1 COOL"
+            elif roll <=10:
+                event += "-1 COOL & -1 REF"
+
+    if  show:
+        print(event)
+    return event
 
 def gen_big_prob_big_wins(show=False)->str:
     roll=randint(1,2)
@@ -300,7 +394,7 @@ if __name__ == '__main__':
             sys.exit(EXIT_CODES.OK)
 
         if arg in ["stats"]:
-            if len(args)<2:
+            if len(args)<3:
                 print("No mode provided...", file=sys.stderr)
                 print_help()
                 sys.exit(EXIT_CODES.NO_OPTION_FOUND)
