@@ -3,7 +3,7 @@ from enum import IntEnum
 from random import randint,choice
 
 VERSION = "0.0.6"
-class EXIT_CODES(IntEnum):
+class ExitCodes(IntEnum):
     OK = 0
     NO_OPTION_FOUND = 1
     OPTION_NOT_RECOGNIZED = 2
@@ -149,9 +149,14 @@ def gen_role()->str:
 def gen_stats(mode,show=False)->dict:
     """
     Generate a random stats dict
-    :param mode:
-      9d10: Returns CP to distribute between stats by the user
-      d10: Returns stats (3-10)
+
+    9d10: Returns CP to distribute between stats by the user
+
+    d10: Returns stats (3-10)
+
+    :param mode:str - 9d10 | d10
+    :param show:bool - wether to print the output to stdout
+
     :return:
     """
 
@@ -171,7 +176,7 @@ def gen_stats(mode,show=False)->dict:
         case _:
             print(f"Unknown mode: {mode}", file=sys.stderr)
             print_help()
-            sys.exit(EXIT_CODES.MODE_NOT_RECOGNIZED)
+            sys.exit(ExitCodes.MODE_NOT_RECOGNIZED)
 
 def gen_stats_9d10()->dict:
     acc=0
@@ -318,18 +323,18 @@ def gen_disaster_event(show=False)->str:
 def gen_big_prob_big_wins(show=False)->str:
     roll=randint(1,2)
     if roll==1:
-        event = f"disaster event :{gen_disaster_event()}"
+        event = f"disaster event : {gen_disaster_event()}"
         if show:
             print(event)
         return event
     elif roll==2:
-        event = f"lucky event :{gen_lucky_event()}"
+        event = f"lucky event : {gen_lucky_event()}"
         if show:
             print(event)
         return event
     else:
         print(f"d2 returned {roll} O.o ...",file=sys.stderr)
-        sys.exit(EXIT_CODES.UNEXPECTED_ERROR)
+        sys.exit(ExitCodes.UNEXPECTED_ERROR)
 
 def gen_frenemies(show=False)->str:
     #TODO
@@ -359,11 +364,11 @@ def gen_life_events(age:int,show=False)->dict:
     if not isinstance(age,int):
         print("Age must be an integer greater than 16...",file=sys.stderr)
         print_help()
-        sys.exit(EXIT_CODES.WRONG_DATA_TYPE)
+        sys.exit(ExitCodes.WRONG_DATA_TYPE)
     if age<=16:
         print("Age must be an integer greater than 16...", file=sys.stderr)
         print_help()
-        sys.exit(EXIT_CODES.INVALID_DATA_TYPE)
+        sys.exit(ExitCodes.WRONG_DATA_TYPE)
 
     res = {}
 
@@ -387,7 +392,10 @@ def gen_life_events(age:int,show=False)->dict:
         else:
             res[year] = f"{date}: Nothing"
 
-        print(res[year])
+        if show:
+            print(res[year])
+
+    return res
 
 
 # ======================================================================================================================
@@ -400,42 +408,42 @@ if __name__ == '__main__':
     if len(args) < 1:
         print("No options provided...",file=sys.stderr)
         print_help()
-        sys.exit(EXIT_CODES.NO_OPTION_FOUND)
+        sys.exit(ExitCodes.NO_OPTION_FOUND)
 
     arg=args[0]
 
     if arg in ["-v", "--version"]:
         print_version()
-        sys.exit(EXIT_CODES.OK)
+        sys.exit(ExitCodes.OK)
 
     if arg in ["-h", "--help"]:
         print_help()
-        sys.exit(EXIT_CODES.OK)
+        sys.exit(ExitCodes.OK)
 
     if arg in ["character"]:
         if len(args)<2:
             print("No options provided...", file=sys.stderr)
             print_help()
-            sys.exit(EXIT_CODES.NO_OPTION_FOUND)
+            sys.exit(ExitCodes.NO_OPTION_FOUND)
         arg=args[1]
 
         if arg in ["sgs"]:
             print(gen_sgs())
-            sys.exit(EXIT_CODES.OK)
+            sys.exit(ExitCodes.OK)
 
         if arg in ["role"]:
             print(gen_role())
-            sys.exit(EXIT_CODES.OK)
+            sys.exit(ExitCodes.OK)
 
         if arg in ["stats"]:
             if len(args)<3:
                 print("No mode provided...", file=sys.stderr)
                 print_help()
-                sys.exit(EXIT_CODES.NO_OPTION_FOUND)
+                sys.exit(ExitCodes.NO_OPTION_FOUND)
 
             mode=args[2]
             gen_stats(mode,show=True)
-            sys.exit(EXIT_CODES.OK)
+            sys.exit(ExitCodes.OK)
 
         if arg in ["life"]:
             if len(args)==3 and args[2].isdigit():
@@ -445,16 +453,16 @@ if __name__ == '__main__':
             else:
                 print("Age must be an integer greater than 16...", file=sys.stderr)
                 print_help()
-                sys.exit(EXIT_CODES.WRONG_DATA_TYPE)
+                sys.exit(ExitCodes.WRONG_DATA_TYPE)
 
             if age<=16:
                 print("Age must be an integer greater than 16...", file=sys.stderr)
                 print_help()
-                sys.exit(EXIT_CODES.INVALID_DATA)
+                sys.exit(ExitCodes.INVALID_DATA)
 
             gen_life_events(age,show=True)
-            sys.exit(EXIT_CODES.OK)
+            sys.exit(ExitCodes.OK)
 
     print(f"Unknown option: {arg}",file=sys.stderr)
     print_help()
-    sys.exit(EXIT_CODES.OPTION_NOT_RECOGNIZED)
+    sys.exit(ExitCodes.OPTION_NOT_RECOGNIZED)
