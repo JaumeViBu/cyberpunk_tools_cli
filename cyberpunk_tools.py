@@ -24,10 +24,9 @@ def print_help():
     print("    -h, --help: display this help message")
     print("    sgs: gen a random sgs string")
     print("    role: gen a random role string")
-    print("  stats <mode>: gen random stats following a given mode")
-    print("    available modes:")
+    print("    stats <mode>: gen random stats following a given mode")
     print("      9d10:  roll 9d10 and return the CP for the user to distribute")
-    print("       d10:  roll d10 for every stat, min 3")
+    print("      d10:   roll d10 for every stat, min 3")
 
 def print_character_help():
     """
@@ -41,9 +40,8 @@ def print_character_help():
     print("  sgs: gen a random sgs string")
     print("  role: gen a random role string")
     print("  stats <mode>: gen random stats following a given mode")
-    print("    available modes:")
-    print("      9d10:  roll 9d10 and return the CP for the user to distribute")
-    print("       d10:  roll d10 for every stat, min 3")
+    print("    9d10:  roll 9d10 and return the CP for the user to distribute")
+    print("    d10:   roll d10 for every stat, min 3")
 
 
 def print_version():
