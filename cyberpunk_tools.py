@@ -180,8 +180,42 @@ def gen_stats_9d10()->dict:
     return {"CP":acc}
 
 def gen_lucky_event(show=False)->str:
-    #TODO
-    pass
+    roll = randint(1, 10)
+    event = ""
+
+    match roll:
+        case 1:
+            event = "powerful connection : "
+            roll = randint(1, 10)
+
+            if roll <= 4:
+                event += "in police dept"
+            elif roll <= 7:
+                event += "in District Attorney's office"
+            elif roll <= 10:
+                event += "in mayor's office"
+        case 2:
+            event = f"financial windfall : +{randint(1,10)*100}ed"
+        case 3:
+            event = f"big score : +{randint(1,10)*100}ed"
+        case 4:
+            event = "find sensei : begin at +2 or add +1 to martial skill"
+        case 5:
+            event = "find teacher : begin at +2 or add +1 to int skill"
+        case 6:
+            event = "powerful corpo exec owes you one"
+        case 7:
+            event = "friends with local nomad pack. eq -> family +2"
+        case 8:
+            event = "friend popo. eq -> streetwise +2"
+        case 9:
+            event = "local boostergang likes you. eq -> family +2 beware"
+        case 10:
+            event = "find combar teacher : begin at +2 or add +1 to weapon skill, no ma/brawling"
+
+    if show:
+        print(event)
+    return event
 
 def gen_disaster_event(show=False)->str:
     roll = randint(1,10)
