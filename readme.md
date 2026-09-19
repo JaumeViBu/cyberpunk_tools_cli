@@ -1,6 +1,6 @@
 # Cyberpunk Tools CLI
 
-A lightweight unofficial fanmade command-line utility for generating random **Cyberpunk 2020** character elements — stats, roles, life paths, full characters, npcs and more for use at the table.
+A lightweight unofficial fanmade command-line utility for generating random **Cyberpunk 2020** character elements ( stats, roles, life paths, full characters, npcs and more ) for use at the table.
 
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-Homebrew%20Content%20Policy-lightgrey)](#legal--disclaimer)
@@ -18,7 +18,7 @@ The tool uses game mechanics, role names, and Lifepath tables for **automation a
 ## Requirements
 
 - **Python 3.10 or later** (the script uses `match`/`case` structural pattern matching and `IntEnum`)
-- No third-party dependencies — everything is in the standard library
+- No third-party dependencies
 
 ---
 
@@ -39,7 +39,7 @@ chmod +x cyberpunk_tools.py
 ln -s "$PWD/cyberpunk_tools.py" ~/.local/bin/cyberpunk_tools
 ```
 
-On Windows, in powershell:  
+On Windows, in PowerShell:  
 ```powershell
 notepad $PROFILE
 ```
@@ -49,7 +49,7 @@ function cyberpunk_tools {
     python <full path to >\cyberpunk_tools.py $args
 }
 ```
-then it can be called in a powershell terminal using command
+then it can be called in a PowerShell terminal using command
 ```powershell
 cyberpunk_tools
 ```
@@ -112,14 +112,14 @@ Netrunner
 Roll a CP pool to distribute (9d10):
 
 ```bash
-$ cyberpunk_tools stats 9d10
+$ cyberpunk_tools character stats 9d10
 CP to distribute between stats: 47
 ```
 
 Roll a full stat block (d10, min 3):
 
 ```bash
-$ cyberpunk_tools stats d10
+$ cyberpunk_tools character stats d10
 Stats:
 int :  7
 ref :  5
@@ -146,24 +146,24 @@ cyberpunk tools version: 0.0.6
 The `sgs` command prints a string in the format `sex/gender/sexuality`.
 
 **Sex**
-- `M` — Male
-- `F` — Female
-- `IF` — Intersex, Female appearance
-- `IM` — Intersex, Male appearance
-- `IA` — Intersex, Androgynous appearance
+- `M` - Male
+- `F` - Female
+- `IF` - Intersex, Female appearance
+- `IM` - Intersex, Male appearance
+- `IA` - Intersex, Androgynous appearance
 
 **Gender**
-- `M` — Male
-- `F` — Female
-- `NB` — Non-binary
-- `GF` — Gender fluid
+- `M` - Male
+- `F` - Female
+- `NB` - Non-binary
+- `GF` - Gender fluid
 
 **Sexuality**
-- `Hete` — Heterosexual
-- `Homo` — Homosexual
-- `Bi` — Bisexual
-- `A` — Asexual
-- `Pan` — Pansexual
+- `Hete` - Heterosexual
+- `Homo` - Homosexual
+- `Bi` - Bisexual
+- `A` - Asexual
+- `Pan` - Pansexual
 
 
 ## Extending
