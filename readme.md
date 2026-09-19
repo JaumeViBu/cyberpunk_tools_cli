@@ -32,11 +32,26 @@ cd cyberpunk_tools_cli
 python cyberpunk_tools.py --help
 ```
 
-Optionally, make it executable and drop it on your `PATH`:
+On Linux make it executable and drop it on your `PATH`:
 
 ```bash
 chmod +x cyberpunk_tools.py
 ln -s "$PWD/cyberpunk_tools.py" ~/.local/bin/cyberpunk_tools
+```
+
+On Windows, in powershell:  
+```powershell
+notepad $PROFILE
+```
+add:  
+```
+function cyberpunk_tools {
+    python <full path to >\cyberpunk_tools.py $args
+}
+```
+then it can be called in a powershell terminal using command
+```powershell
+cyberpunk_tools
 ```
 
 ---
