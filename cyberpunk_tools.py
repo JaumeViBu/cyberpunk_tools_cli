@@ -155,7 +155,7 @@ def gen_stats(mode,show=False)->dict:
     d10: Returns stats (3-10)
 
     :param mode:str - 9d10 | d10
-    :param show:bool - wether to print the output to stdout
+    :param show:bool - whether to print the output to stdout
 
     :return:
     """
@@ -216,7 +216,7 @@ def gen_lucky_event(show=False)->str:
         case 9:
             event = "local boostergang likes you. eq -> family +2 beware"
         case 10:
-            event = "find combar teacher : begin at +2 or add +1 to weapon skill, no ma/brawling"
+            event = "find combat teacher : begin at +2 or add +1 to weapon skill, no ma/brawling"
 
     if show:
         print(event)
@@ -265,7 +265,7 @@ def gen_disaster_event(show=False)->str:
             if roll <=5:
                 event += "accident"
             elif roll <=8:
-                event += "murdered : unkown"
+                event += "murdered : unknown"
             else:
                 event += "murdered : known"
         case 7:
@@ -418,7 +418,7 @@ def gen_made_enemy(show=False)->str:
         case 10:
             event += " : foiled a plan of the other's"
 
-    # whos fracked off?
+    # who's fracked off?
     roll = randint(1, 3)
     match roll:
         case 1:
