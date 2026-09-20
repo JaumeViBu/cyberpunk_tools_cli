@@ -1,6 +1,7 @@
 import sys
 from enum import IntEnum
 from random import randint,choice
+from unittest import case
 
 VERSION = "0.0.7"
 class ExitCodes(IntEnum):
@@ -477,8 +478,70 @@ def gen_frenemies(show=False)->str:
         sys.exit(ExitCodes.UNEXPECTED_ERROR)
 
 def gen_romance(show=False)->str:
-    #TODO
-    pass
+    roll=randint(1,10)
+    event = ""
+    match roll:
+        case 1|2|3|4:
+            event += "happy love affair"
+            if show:
+                print(event)
+            return event
+        case 5:
+            event += "tragic love affair : "
+            roll = randint(1,10)
+            match roll:
+                case 1:
+                    event += "died in accident"
+                case 2:
+                    event += "mysteriously vanished"
+                case 3:
+                    event += "didn't work out"
+                case 4:
+                    event += "personal goal / vendetta came between you"
+                case 5:
+                    event += "kidnapped"
+                case 6:
+                    event += "went insane"
+                case 7:
+                    event += "suicide"
+                case 8:
+                    event += "killed in a fight"
+                case 9:
+                    event += "rival cut you of the action"
+                case 10:
+                    event += "imprisoned or exiled"
+        case 6|7:
+            event += "love affair with problems : "
+            roll = randint(1,10)
+
+            match roll:
+                case 1:
+                    event += "lover's friends/family hate you"
+                case 2:
+                    event += "lover's friends/family would use any means to get rid of you"
+                case 3:
+                    event += "friends/family hate your lover"
+                case 4:
+                    event += "one of you has a romantic rival"
+                case 5:
+                    event += "you are separated in some way"
+                case 6:
+                    event += "you fight constantly"
+                case 7:
+                    event += "you're professional rivals"
+                case 8:
+                    event += "one of you is insanely jealous"
+                case 9:
+                    event += "one of you is 'messing around'"
+                case 10:
+                    event += "you have conflicting backgrounds and families"
+        case 8|9|10:
+            event += "fast affairs / hot dates"
+
+    if show:
+        print(event)
+    return event
+
 
 def gen_stats_d10()->dict:
     stats = {
