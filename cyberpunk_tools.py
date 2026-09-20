@@ -3,7 +3,7 @@ from enum import IntEnum
 from random import randint,choice
 from unittest import case
 
-VERSION = "0.0.7"
+VERSION = "0.0.8"
 class ExitCodes(IntEnum):
     OK = 0
     NO_OPTION_FOUND = 1
