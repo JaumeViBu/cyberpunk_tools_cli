@@ -2,7 +2,7 @@ import sys
 from enum import IntEnum
 from random import randint,choice
 
-VERSION = "0.0.6"
+VERSION = "0.0.7"
 class ExitCodes(IntEnum):
     OK = 0
     NO_OPTION_FOUND = 1
@@ -336,9 +336,145 @@ def gen_big_prob_big_wins(show=False)->str:
         print(f"d2 returned {roll} O.o ...",file=sys.stderr)
         sys.exit(ExitCodes.UNEXPECTED_ERROR)
 
+def gen_made_friend(show=False)->str:
+    roll=randint(1,10)
+    event=""
+    match roll:
+        case 1:
+            event += "like bro/sis"
+        case 2:
+            event += "like kid bro/sis"
+        case 3:
+            event += "teacher/mentor"
+        case 4:
+            event += "partner/co-worker"
+        case 5:
+            event += "old lover"
+        case 6:
+            event += "old enemy"
+        case 7:
+            event += "like foster parent"
+        case 8:
+            event += "relative"
+        case 9:
+            event += "old childhood friend"
+        case 10:
+            event += "met through common interest"
+
+    if show:
+        print(event)
+    return event
+
+def gen_made_enemy(show=False)->str:
+    roll = randint(1, 10)
+    event = ""
+    match roll:
+        case 1:
+            event += "ex friend"
+        case 2:
+            event += "ex lover"
+        case 3:
+            event += "relative"
+        case 4:
+            event += "childhood enemy"
+        case 5:
+            event += "working for you"
+        case 6:
+            event += "you work for them"
+        case 7:
+            event += "partner or co-worker"
+        case 8:
+            event += "booster gang member"
+        case 9:
+            event += "corpo exec"
+        case 10:
+            event += "gov official"
+
+    # the cause
+    roll = randint(1, 10)
+    match roll:
+        case 1:
+            event += " : caused the other to lose face or status"
+        case 2:
+            event += " : caused the loss of a lover, friend or relative"
+        case 3:
+            event += " : caused a major humiliation"
+        case 4:
+            event += " : accused the other of cowardice or other personal flaw"
+        case 5:
+            event += " : caused a physical disability : "
+            roll = randint(1, 6)
+            if roll <= 2: event += "lose eye"
+            elif roll <= 4: event += "lose arm"
+            elif roll <= 6: event += "badly scarred"
+        case 6:
+            event += " : deserted/betrayed the other "
+        case 7:
+            event += " : turned down other's job / romantic offer"
+        case 8:
+            event += " : you just didn't like each other"
+        case 9:
+            event += " : was a romantic rival "
+        case 10:
+            event += " : foiled a plan of the other's"
+
+    # whos fracked off?
+    roll = randint(1, 3)
+    match roll:
+        case 1:
+            event += " : they hate you"
+        case 2:
+            event += " : you hate them"
+        case 3:
+            event += " : mutual hate"
+
+    #watcha gonna do about it?
+    roll = randint(1, 5)
+    match roll:
+        case 1:
+            event += " : muderous/killing rage & kill them"
+        case 2:
+            event += " : avoid them"
+        case 3:
+            event += " : backstab them indirectly"
+        case 4:
+            event += " : ignore them"
+        case 5:
+            event += " : attack verbally"
+
+    #what can they throw against you?
+    roll = randint(1, 10)
+    match roll:
+        case 1|2|3:
+            event += " : himself"
+        case 4|5:
+            event += " : himself + few friends"
+        case 6|7:
+            event += " : entire gang"
+        case 8|9:
+            event += " : small corp"
+        case 10:
+            event += " : full gov agency"
+
+    if show:
+        print(event)
+    return event
+
 def gen_frenemies(show=False)->str:
-    #TODO
-    pass
+    roll=randint(1,2)
+    if roll==1:
+        event = f"made friend : {gen_made_friend()}"
+        if show:
+            print(event)
+        return event
+    elif roll==2:
+        event = f"made enemy : {gen_made_enemy()}"
+        if show:
+            print(event)
+        return event
+    else:
+        print(f"d2 returned {roll} O.o ...",file=sys.stderr)
+        sys.exit(ExitCodes.UNEXPECTED_ERROR)
 
 def gen_romance(show=False)->str:
     #TODO
