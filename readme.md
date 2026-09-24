@@ -69,7 +69,6 @@ cyberpunk_tools <option>
 | `-h`, `--help` | Display the help message |
 | `-v`, `--version` | Display the current version |
 | `character <option>` | Character-related tools (see below) |
-| `stats <mode>` | Generate a random stat block using the given mode |
 
 ### Character options
 
@@ -79,10 +78,10 @@ cyberpunk_tools character <option>
 
 | Option | Description |
 | --- | --- |
-| `-h`, `--help` | Display the character help message |
 | `sgs` | Generate a random SGS (sex/gender/sexuality) string |
 | `role` | Generate a random role string |
 | `stats <mode>` | Generate random stats using the given mode |
+| `life [age]` | Generate life-path events for the specified age, or a random age from 18–28 |
 
 ### Stat generation modes
 
@@ -90,6 +89,12 @@ cyberpunk_tools character <option>
 | --- | --- |
 | `9d10` | Roll 9d10 and return the total CP for the user to distribute |
 | `d10` | Roll d10 for every stat, with a minimum of 3 |
+
+### Life-path generation
+
+The `life` command generates events for each year from age 16 through the selected age. 
+The age must be an integer greater than `16`
+When omitted, it defaults to a random age from 18–28 (`2d6 + 16`).
 
 ---
 
@@ -107,6 +112,22 @@ Generate a random role:
 ```bash
 $ cyberpunk_tools character role
 Netrunner
+```
+
+Generate life-path events for a random age:
+
+```bash
+$ cyberpunk_tools character life
+Age: 24
+===============================================
+2006: Big Prob/big wins : lucky event : financial windfall : +400ed
+2007: Frenemies : made friend : old childhood friend
+```
+
+Generate life-path events for a specific age:
+
+```bash
+$ cyberpunk_tools character life 30
 ```
 
 Roll a CP pool to distribute (9d10):
@@ -136,7 +157,7 @@ Check the version:
 
 ```bash
 $ cyberpunk_tools --version
-cyberpunk tools version: 0.0.6
+cyberpunk tools version: 0.0.8
 ```
 
 ---
