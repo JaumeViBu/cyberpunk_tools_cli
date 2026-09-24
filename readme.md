@@ -82,6 +82,7 @@ cyberpunk_tools character <option>
 | `role` | Generate a random role string |
 | `stats <mode>` | Generate random stats using the given mode |
 | `life [age]` | Generate life-path events for the specified age, or a random age from 18–28 |
+| `motivations` | Generate a random character personality and motivation set |
 
 ### Stat generation modes
 
@@ -92,9 +93,13 @@ cyberpunk_tools character <option>
 
 ### Life-path generation
 
-The `life` command generates events for each year from age 16 through the selected age. 
-The age must be an integer greater than `16`
+The `life` command generates events for each year from age 16 through the selected age.
+The age must be an integer greater than 16.
 When omitted, it defaults to a random age from 18–28 (`2d6 + 16`).
+
+### Motivation generation
+
+The `motivations` command generates a character personality, the person and concept they value most, their attitude toward other people, and their most-valued possession category.
 
 ---
 
@@ -153,11 +158,23 @@ body:  9
 emp :  5
 ```
 
+Generate a character motivation set:
+
+```bash
+$ cyberpunk_tools character motivations
+Motivations:
+Personality: Friendly and outgoing
+Person you value most: Yourself
+What you value most: Friendship
+How you feel about most people: People are wonderful
+Your most valued possession: A photograph
+```
+
 Check the version:
 
 ```bash
 $ cyberpunk_tools --version
-cyberpunk tools version: 0.0.8
+cyberpunk tools version: 0.0.9
 ```
 
 ---
@@ -191,9 +208,9 @@ The `sgs` command prints a string in the format `sex/gender/sexuality`.
 
 The codebase is intentionally small and flat. To add a new tool:
 
-1. Add a `<tool>()` function near the existing functions.
-2. Wire it into a fitting option branch of `__main__` (`character`,...) or create one.
-3. Update `print_help()`.
+1. Add a `<tool>()` function near the existing functions, including a docstring that describes its parameters, return value, and any side effects.
+2. Wire it into a fitting option branch of `__main__` (`character`, ...) or create one.
+3. Update `print_help()` and this README.
 
 
 ## Legal & Disclaimer

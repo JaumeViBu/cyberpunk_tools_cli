@@ -180,12 +180,23 @@ def gen_stats(mode,show=False)->dict:
             sys.exit(ExitCodes.MODE_NOT_RECOGNIZED)
 
 def gen_stats_9d10()->dict:
+    """
+    Generate character point credits by rolling nine d10 dice
+
+    :return: dict containing the total as the "CP" key
+    """
     acc=0
     for i in range(9):
         acc+=randint(1,10)
     return {"CP":acc}
 
 def gen_lucky_event(show=False)->str:
+    """
+    Generate a random lucky event
+
+    :param show: bool - whether to print the event to stdout
+    :return: random lucky event string
+    """
     roll = randint(1, 10)
     event = ""
 
@@ -224,6 +235,12 @@ def gen_lucky_event(show=False)->str:
     return event
 
 def gen_disaster_event(show=False)->str:
+    """
+    Generate a random disaster event
+
+    :param show: bool - whether to print the event to stdout
+    :return: random disaster event string
+    """
     roll = randint(1,10)
     event = ""
 
@@ -322,6 +339,12 @@ def gen_disaster_event(show=False)->str:
     return event
 
 def gen_big_prob_big_wins(show=False)->str:
+    """
+    Generate a random big problem or big win event
+
+    :param show: bool - whether to print the event to stdout
+    :return: random disaster or lucky event string
+    """
     roll=randint(1,2)
     if roll==1:
         event = f"disaster event : {gen_disaster_event()}"
@@ -338,6 +361,12 @@ def gen_big_prob_big_wins(show=False)->str:
         sys.exit(ExitCodes.UNEXPECTED_ERROR)
 
 def gen_made_friend(show=False)->str:
+    """
+    Generate a random person who becomes the character's friend
+
+    :param show: bool - whether to print the event to stdout
+    :return: random friend description string
+    """
     roll=randint(1,10)
     event=""
     match roll:
@@ -367,6 +396,12 @@ def gen_made_friend(show=False)->str:
     return event
 
 def gen_made_enemy(show=False)->str:
+    """
+    Generate a random person who becomes the character's enemy
+
+    :param show: bool - whether to print the event to stdout
+    :return: random enemy description string
+    """
     roll = randint(1, 10)
     event = ""
     match roll:
@@ -462,6 +497,12 @@ def gen_made_enemy(show=False)->str:
     return event
 
 def gen_frenemies(show=False)->str:
+    """
+    Generate a random friend or enemy event
+
+    :param show: bool - whether to print the event to stdout
+    :return: random friend or enemy description string
+    """
     roll=randint(1,2)
     if roll==1:
         event = f"made friend : {gen_made_friend()}"
@@ -478,6 +519,12 @@ def gen_frenemies(show=False)->str:
         sys.exit(ExitCodes.UNEXPECTED_ERROR)
 
 def gen_romance(show=False)->str:
+    """
+    Generate a random romance event
+
+    :param show: bool - whether to print the event to stdout
+    :return: random romance description string
+    """
     roll=randint(1,10)
     event = ""
     match roll:
@@ -544,6 +591,11 @@ def gen_romance(show=False)->str:
 
 
 def gen_stats_d10()->dict:
+    """
+    Generate random values from 3 to 10 for each character stat
+
+    :return: dict mapping each character stat to a random value
+    """
     stats = {
         "int": 0,
         "ref": 0,
@@ -560,6 +612,13 @@ def gen_stats_d10()->dict:
     return stats
 
 def gen_life_events(age:int,show=False)->dict:
+    """
+    Generate life events for each year since the character turned 16
+
+    :param age: int - current character age, greater than 16
+    :param show: bool - whether to print each event to stdout
+    :return: dict mapping year offsets to generated life event strings
+    """
     if not isinstance(age,int):
         print("Age must be an integer greater than 16...",file=sys.stderr)
         print_help()
@@ -597,6 +656,12 @@ def gen_life_events(age:int,show=False)->dict:
     return res
 
 def gen_personality(show=False)->str:
+    """
+    Generate a random character personality
+
+    :param show: bool - whether to print the personality to stdout
+    :return: random personality string
+    """
     options = [
         "Shy and secretive",
         "Rebellious, antisocial, violent",
@@ -615,6 +680,12 @@ def gen_personality(show=False)->str:
     return res
 
 def gen_person_value_most(show=False)->str:
+    """
+    Generate a random person the character values most
+
+    :param show: bool - whether to print the person to stdout
+    :return: random valued person string
+    """
     options = [
         "A parent",
         "Brother or sister",
@@ -634,6 +705,12 @@ def gen_person_value_most(show=False)->str:
     return res
 
 def gen_what_value_most(show=False)->str:
+    """
+    Generate a random concept the character values most
+
+    :param show: bool - whether to print the concept to stdout
+    :return: random most-valued concept string
+    """
     options = [
         "Money",
         "Honor",
@@ -653,6 +730,12 @@ def gen_what_value_most(show=False)->str:
     return res
 
 def gen_how_feel_people(show=False)->str:
+    """
+    Generate a random attitude toward other people
+
+    :param show: bool - whether to print the attitude to stdout
+    :return: random attitude string
+    """
     options = [
         "Neutral",
         "Neutral",
@@ -672,6 +755,12 @@ def gen_how_feel_people(show=False)->str:
     return res
 
 def gen_most_valued_pos(show=False)->str:
+    """
+    Generate a random most-valued possession category
+
+    :param show: bool - whether to print the possession category to stdout
+    :return: random possession category string
+    """
     options = [
         "A weapon",
         "A tool",
@@ -690,6 +779,13 @@ def gen_most_valued_pos(show=False)->str:
     return res
 
 def gen_motivations(show=False)->dict:
+    """
+    Generate a random set of character motivations
+
+    :param show: bool - whether to print the motivations to stdout
+    :return: dict containing personality, valued person and concept,
+             attitude toward people, and most-valued possession
+    """
     res={}
     res["personality"] = gen_personality(show=False)
     res["person_value_most"] = gen_person_value_most(show=False)
