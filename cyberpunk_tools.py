@@ -2,7 +2,7 @@ import sys
 from enum import IntEnum
 from random import randint,choice
 
-VERSION = "0.0.8"
+VERSION = "0.0.9"
 class ExitCodes(IntEnum):
     OK = 0
     NO_OPTION_FOUND = 1
@@ -33,6 +33,7 @@ def print_help():
     print("    life [age]: generates life events for given age")
     print("                age must be an integer > 0")
     print("                age option defaults to random ( 2d6 + 16 )")
+    print("    motivations: gen a random motivations string")
 
 def print_version():
     """
@@ -595,6 +596,117 @@ def gen_life_events(age:int,show=False)->dict:
 
     return res
 
+def gen_personality(show=False)->str:
+    options = [
+        "Shy and secretive",
+        "Rebellious, antisocial, violent",
+        "Arrogant, proud and aloof",
+        "Moody, rash and headstrong",
+        "Picky, fussy and nervous",
+        "Stable and serious",
+        "Silly and fluffheaded",
+        "Sneaky and deceptive",
+        "Intellectual and detached",
+        "Friendly and outgoing",
+    ]
+    res= choice(options)
+    if show:
+        print(f"Personality: {res}")
+    return res
+
+def gen_person_value_most(show=False)->str:
+    options = [
+        "A parent",
+        "Brother or sister",
+        "Lover",
+        "Friend",
+        "Yourself",
+        "A pet",
+        "Teacher or mentor",
+        "Public figure",
+        "A personal hero",
+        "No one",
+    ]
+
+    res = choice(options)
+    if show:
+        print(f"Person you value most: {res}")
+    return res
+
+def gen_what_value_most(show=False)->str:
+    options = [
+        "Money",
+        "Honor",
+        "Your word",
+        "Honesty",
+        "Knowledge",
+        "Vengeance",
+        "Love",
+        "Power",
+        "Having a good time",
+        "Friendship",
+    ]
+
+    res = choice(options)
+    if show:
+        print(f"What do you value the most: {res}")
+    return res
+
+def gen_how_feel_people(show=False)->str:
+    options = [
+        "Neutral",
+        "Neutral",
+        "I like almost everyone",
+        "I hate almost everyone",
+        "People are tools.Use them for your own goals and discard them",
+        "Every person is a valuable individual",
+        "People are obstacles to be destroyed if they cross me",
+        "People are untrustworthy.Don't depend on anyone",
+        "Wipe 'em all out and give the place to the cockroaches",
+        "People are wonderful",
+    ]
+
+    res = choice(options)
+    if show:
+        print(f"How do you feel about most people: {res}")
+    return res
+
+def gen_most_valued_pos(show=False)->str:
+    options = [
+        "A weapon",
+        "A tool",
+        "A piece of clothing",
+        "A photograph",
+        "A book or diary",
+        "A recording",
+        "A musical instrument",
+        "A piece of jewelry",
+        "A toy",
+        "A letter",
+    ]
+    res = choice(options)
+    if show:
+        print(f"Most valued possession: {res}")
+    return res
+
+def gen_motivations(show=False)->dict:
+    res={}
+    res["personality"] = gen_personality(show=False)
+    res["person_value_most"] = gen_person_value_most(show=False)
+    res["what_value_most"] = gen_what_value_most(show=False)
+    res["how_feel_people"] = gen_how_feel_people(show=False)
+    res["most_valued_pos"] = gen_most_valued_pos(show=False)
+
+    if show:
+        print(f"Motivations:")
+        print(f"Personality: {res['personality']}")
+        print(f"Person you value most: {res['person_value_most']}")
+        print(f"What you value most: {res['what_value_most']}")
+        print(f"How you feel about most people: {res['how_feel_people']}")
+        print(f"Your most valued possession: {res['most_valued_pos']}")
+
+    return res
+
 
 # ======================================================================================================================
 
@@ -659,6 +771,10 @@ if __name__ == '__main__':
                 sys.exit(ExitCodes.INVALID_DATA)
 
             gen_life_events(age,show=True)
+            sys.exit(ExitCodes.OK)
+
+        if arg in ["motivations"]:
+            gen_motivations(show=True)
             sys.exit(ExitCodes.OK)
 
     print(f"Unknown option: {arg}",file=sys.stderr)
